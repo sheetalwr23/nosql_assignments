@@ -3,6 +3,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const dotenv=require('dotenv')
+dotenv.config()
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -34,7 +36,7 @@ app.use(errorController.get404);
 
 mongoose
   .connect(
-    'process.env.MONGO_URI'
+    process.env.MONGO_URI
   )
   .then(result => {
     User.findOne().then(user => {
